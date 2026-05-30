@@ -68,6 +68,7 @@ class JobTitles:
         result = json.loads(text)
         return result
 
+
     def get_titles(self, parsed_response):
         job_titles = []
         for job in parsed_response["recommended_job_titles"]:
