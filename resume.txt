@@ -1,0 +1,37 @@
+Ryan Hansen
+Salt Lake City, UT, 84103 | ryanhansen2222@gmail.com | (406) 551-3713
+linkedin.com/in/ryanhansen2222 | github.com/ryanhansen2222
+
+Skills
+Technical: Distributed Systems, GCP, Python, Inference Pipelines, Model Evaluation Frameworks, Scalable REST APIs, LLM/Transformer, Cloud, RAG, Prompt engineering, Microservices, Vector DB, HuggingFace, SQL, linux, git, automation, Backend, C++
+Soft: Working through ambiguity, Communication, Teamwork, Ownership, Customer Service
+
+Experience
+Software Engineer | Cognizant Technology Solutions
+Plano, TX | Jan 2023 - July 2024
+Built asynchronous distributed transformer inference pipeline on GCP to reduce RFP project review time from ~57 days to 7-14 days using Matching Engine and embeddings.
+Developed automated evaluation framework for validating RAG outputs for a 10M document dataset using autocorrelation and topic modelling reference anchors.
+Designed cloud inference workflow to support concurrent processing of multiple 1000+ request jobs using asynchronous batching and elastically creating backend instances.
+Tracked application usage with hourly and daily automated CRON reporting scripts
+
+Systems Engineer | Tata Consultancy Services
+Edison, NJ | Aug 2021 - Jan 2023
+Enterprise infrastructure support for 13,000+ users running Windows on VMware.
+
+Projects
+Image Processing for Memory Research using AI | University of Utah
+Created AI-based image processing pipeline to automate central object detection, cropping, and orientation correction for 150+ research photos using GroundingDino.
+Do Books a Reader Reads Signal their Social Profile | University of Utah
+Developed reader profiling framework to create 5D scored profiles for Goodreads users using a writing sample from a posted book review, LIWC, and text embeddings.
+Latent Variables in Neurodegenerative Disease | University of Utah
+Created ML integrated inference workflow that recreates results from 2025 publication, associating functional connectivity parameters 𝛼 and 𝛽 with neurodegenerative disease.
+Improved performance of inference 16x by parallelizing distributed cloud computing.
+
+Education
+Master’s Mathematics | GPA: 3.73
+University of Utah | Salt Lake City, UT | Aug 2024 - May 2026
+Bachelor’s Computer Science | GPA: 3.7
+Montana State University | Bozeman, MT | Aug 2016 - May 2021
+Other
+Volunteered 70 shifts at the Humane Society of Utah, totalling $2259 in impact value.
+Wrote winning 1-page essay nomination for $1000 university teaching award.

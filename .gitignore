@@ -1,0 +1,52 @@
+# Python
+config
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+build/
+develop-eggs/
+dist/
+eggs/
+.eggs/
+*.egg-info/
+.installed.cfg
+*.manifest
+*.spec
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.hypothesis/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.mo
+*.pot
+*.log
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.vscode/ # VSCode settings
+.idea/   # PyCharm settings
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Project-specific sensitive/temporary files
+resume.txt # Do not commit your personal resume
+job.txt    # Do not commit specific job descriptions
+job_titles.csv # Generated output, usually not committed
+*.env      # Environment variable files
+*.bak      # Backup files
+
+# API Keys and other credentials (if not already handled by env vars)
+# While you're using an environment variable, if you ever had a local config file,
+# you'd want to exclude it. Example:
+# api_keys.txt
