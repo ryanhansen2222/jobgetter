@@ -8,7 +8,7 @@ def load_file(path):
         return f.read()
 
 resume = load_file("../resume.txt")
-job = load_file("../job.txt")
+job = load_file("job.txt")
 
 prompt = f"""
 Compare this resume against the job description.
