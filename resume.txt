@@ -3,7 +3,7 @@ Salt Lake City, UT, 84103 | ryanhansen2222@gmail.com | (406) 551-3713
 linkedin.com/in/ryanhansen2222 | github.com/ryanhansen2222
 
 Skills
-Technical: Distributed Systems, GCP, Python, Inference Pipelines, Model Evaluation Frameworks, Scalable REST APIs, LLM/Transformer, Cloud, RAG, Prompt engineering, Microservices, Vector DB, HuggingFace, SQL, linux, git, automation, Backend, C++
+Technical: Distributed Systems, GCP, Python, Inference Pipelines, Model Evaluation Frameworks, Scalable REST APIs, LLM/Transformer, Cloud, RAG, Prompt engineering, Microservices, Vector DB, HuggingFace, SQL, linux, git, automation, Pytorch, C++
 Soft: Working through ambiguity, Communication, Teamwork, Ownership, Customer Service
 
 Experience
@@ -19,13 +19,12 @@ Edison, NJ | Aug 2021 - Jan 2023
 Enterprise infrastructure support for 13,000+ users running Windows on VMware.
 
 Projects
+JobGetter, an AI Agent to Screen Jobs | Personal (on github)
+Developed AI Agent to screen recent job listings (~6000/day) from LinkedIn, Indeed, and Greenhouse for matches against my resume using Python and Gemini.
 Image Processing for Memory Research using AI | University of Utah
 Created AI-based image processing pipeline to automate central object detection, cropping, and orientation correction for 150+ research photos using GroundingDino.
 Do Books a Reader Reads Signal their Social Profile | University of Utah
 Developed reader profiling framework to create 5D scored profiles for Goodreads users using a writing sample from a posted book review, LIWC, and text embeddings.
-Latent Variables in Neurodegenerative Disease | University of Utah
-Created ML integrated inference workflow that recreates results from 2025 publication, associating functional connectivity parameters 𝛼 and 𝛽 with neurodegenerative disease.
-Improved performance of inference 16x by parallelizing distributed cloud computing.
 
 Education
 Master’s Mathematics | GPA: 3.73

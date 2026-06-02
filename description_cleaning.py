@@ -1,5 +1,6 @@
 import pandas as pd
 import csv
+from datetime import date
 
 class DescriptionCleaning:
 
@@ -7,7 +8,9 @@ class DescriptionCleaning:
         pass
 
     def load_data(self):
-        job_data = pd.read_csv("full_job_data")
+        today = date.today().isoformat()
+        filename = f"full_job_data_{today}.csv"
+        job_data = pd.read_csv(filename)
         return job_data
 
     def clean_df(self, job_data):
@@ -17,14 +20,15 @@ class DescriptionCleaning:
     def extract_requirements(self, full_description):
         KEEP_HEADERS = [
             "Responsibilit",
-            "Requirement",
+            "Require",
             "Qualification",
             "Preferred",
-            "What You'll",
+            "What You",
             "Required Skills",
             "Must-have",
             "must have",
-            "About you"
+            "About you",
+            "experience"
         ]
         text_lower = full_description.lower()
 
@@ -46,6 +50,8 @@ class DescriptionCleaning:
     def save_to_csv(self, full_df, filename: str = "full_jobs_cleaned.csv"):
         """Saves a list of job titles to a CSV file."""
         try:
+            today = date.today().isoformat()
+            filename = f"full_jobs_cleaned_{today}.csv"
             full_df.to_csv(filename, index=False, quoting=csv.QUOTE_NONNUMERIC, escapechar="\\")
 
             print(f"\nSaved cleaned data to {filename}")

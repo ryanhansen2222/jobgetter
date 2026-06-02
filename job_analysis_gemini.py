@@ -9,7 +9,7 @@ import argparse
 import os
 import sys
 from pathlib import Path
-from datetime import datetime
+from datetime import date
 
 
 # ── Core Analysis ──────────────────────────────────────────────────────────────
@@ -17,7 +17,9 @@ class AiAnalysis:
     def __init__(self):
         pass
     def load_data(self):
-        job_data = pd.read_csv("full_jobs_cleaned.csv")
+        today = date.today().isoformat()
+        filename = f"full_jobs_cleaned_{today}.csv"
+        job_data = pd.read_csv(filename)
         return job_data
 
     def load_profile(self):
@@ -32,7 +34,7 @@ class AiAnalysis:
             key = f.read().split('=')[1]
             return key
 
-    def run_analysis(self, df, profile, limit = 500):
+    def run_analysis(self, df, profile, limit = 2000):
         count = 0
         for idx, job in df.iterrows():
             count+=1
@@ -50,8 +52,8 @@ class AiAnalysis:
 
 
             if count == limit:
-                break
-        return df.head(limit)
+                return df.head(limit)
+        return df
 
 
 
@@ -63,7 +65,7 @@ class AiAnalysis:
         prompt = f"""You are a recruiting assistant. You will receive a job description and a candidate profile.
     Respond with a concise JSON object containing:
     - "match_score": [0-100]
-    - "missing_skills": List of 0-5 job skills listed in the job description that are missing from the candidate profile
+    - "missing_skills": List of 0-5 job requirements listed in the job description that are missing from the candidate profile. Be detail oriented.
     - "recommendation": [1-5] where 5 is the highest recommendation and 1 is the lowest.
     
     Respond with JSON only. No markdown, no explanation.
@@ -94,7 +96,9 @@ class AiAnalysis:
         profile = self.load_profile()
         df = self.load_data()
         analyzed_df = self.run_analysis(df, profile)
-        analyzed_df.to_csv("analyzed_jobs.csv", index=False, quoting=csv.QUOTE_NONNUMERIC, escapechar="\\")
+        today = date.today().isoformat()
+        filename = f"analyzed_jobs_{today}.csv"
+        analyzed_df.to_csv(filename, index=False, quoting=csv.QUOTE_NONNUMERIC, escapechar="\\")
 
 
 

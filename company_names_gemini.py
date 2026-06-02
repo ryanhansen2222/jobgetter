@@ -1,6 +1,8 @@
 from google import genai
 import json
 import csv
+from datetime import date
+
 
 
 class CompanyNames:
@@ -87,6 +89,9 @@ class CompanyNames:
         return job_titles
 
     def save_to_csv(self, job_titles: list[str], filename: str = "company_names.csv"):
+        today = date.today().isoformat()
+        filename = f"company_names_{today}.csv"
+
         """Saves a list of job titles to a CSV file."""
         try:
             with open(filename, 'w', newline='', encoding='utf-8') as csvfile:

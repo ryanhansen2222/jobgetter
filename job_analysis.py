@@ -5,9 +5,9 @@ Loads job listings from a CSV, runs Claude analysis on each description,
 and saves results incrementally so progress is never lost.
 
 Usage:
-    python analyze_jobs.py --input full_job_data.csv --output results.csv
-    python analyze_jobs.py --input full_job_data.csv --output results.csv --limit 50
-    python analyze_jobs.py --input full_job_data.csv --output results.csv --resume
+    python analyze_jobs.py --input full_job_data.csv.csv --output results.csv
+    python analyze_jobs.py --input full_job_data.csv.csv --output results.csv --limit 50
+    python analyze_jobs.py --input full_job_data.csv.csv --output results.csv --resume
 """
 
 import anthropic

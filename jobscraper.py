@@ -3,6 +3,7 @@ from jobspy import scrape_jobs
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
+from datetime import date
 
 
 class JobScrape:
@@ -16,7 +17,9 @@ class JobScrape:
         return titles["Job Title"].tolist()
 
     def get_names(self):
-        names = pd.read_csv("company_names.csv")
+        today = date.today().isoformat()
+        filename = f"company_names_{today}.csv"
+        names = pd.read_csv(filename)
         #print(names)
 
         return names["Company Name"].tolist()
@@ -77,7 +80,7 @@ class JobScrape:
             site_name=["indeed"],  # "glass
             search_term=title,
             location=None,
-            results_wanted=1000
+            results_wanted=100
         )
 
         #print(jobs[['title', 'company', 'location', 'date_posted', 'description']])
@@ -195,7 +198,10 @@ class JobScrape:
 
         full_df = pd.concat([lever, greenhouse, indeed, linkedin], ignore_index=True)
 
-        full_df.to_csv("full_job_data", index=False, quoting=csv.QUOTE_NONNUMERIC, escapechar="\\")
+        today = date.today().isoformat()
+        filename = f"full_job_data_{today}.csv"
+
+        full_df.to_csv(filename, index=False, quoting=csv.QUOTE_NONNUMERIC, escapechar="\\")
         print(f"Successfully saved {len(full_df)} jobs to csv")
 
 
