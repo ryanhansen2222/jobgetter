@@ -1,6 +1,7 @@
 # Python
 config
 __pycache__/
+*.json
 *.csv
 *.pyc
 *.pyo

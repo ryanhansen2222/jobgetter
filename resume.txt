@@ -1,30 +1,25 @@
-Ryan Hansen
-Salt Lake City, UT, 84103 | ryanhansen2222@gmail.com | (406) 551-3713
-linkedin.com/in/ryanhansen2222 | github.com/ryanhansen2222
-
 Skills
-Technical: Distributed Systems, GCP, Python, Inference Pipelines, Model Evaluation Frameworks, Scalable REST APIs, LLM/Transformer, Cloud, RAG, Prompt engineering, Microservices, Vector DB, HuggingFace, SQL, linux, git, automation, Pytorch, C++
-Soft: Working through ambiguity, Communication, Teamwork, Ownership, Customer Service
+Technical: Distributed Systems, GCP, Python, Inference Pipelines, Model Evaluation Frameworks, Scalable REST APIs, LLM/Transformer, Cloud, RAG, Prompt engineering, Microservices, Vector DB, HuggingFace, SQL, linux, git, automation, Pytorch, C++, Claude, Documentation, CI/CD, AWS, S3
+Soft: Working through ambiguity, Communication, Teamwork, Ownership, Customer Service, Curiosity
 
 Experience
 Software Engineer | Cognizant Technology Solutions
 Plano, TX | Jan 2023 - July 2024
-Built asynchronous distributed transformer inference pipeline on GCP to reduce RFP project review time from ~57 days to 7-14 days using Matching Engine and embeddings.
-Developed automated evaluation framework for validating RAG outputs for a 10M document dataset using autocorrelation and topic modelling reference anchors.
-Designed cloud inference workflow to support concurrent processing of multiple 1000+ request jobs using asynchronous batching and elastically creating backend instances.
-Tracked application usage with hourly and daily automated CRON reporting scripts
-
+Built and trained asynchronous distributed transformer inference pipeline on GCP to reduce RFP project review time from ~57 days to 7-14 days using Matching Engine and document-to-vector embeddings.
+Developed automated evaluation framework for validating RAG outputs for a 10M document dataset using self-matching verification, topic modelling reference anchors, and keyword analysis.
+Designed cloud inference workflow to securely support concurrent processing of multiple 1000+ request jobs using user authn/authz tokens, asynchronous batch requests, and elastically creating backend instances.
+Collaborated with engineers to ship 2 applications by integrating independent APIs and writing docs
 Systems Engineer | Tata Consultancy Services
 Edison, NJ | Aug 2021 - Jan 2023
-Enterprise infrastructure support for 13,000+ users running Windows on VMware.
+Enterprise infrastructure support for 13,000+ users running Windows OS on VMware managed servers.
 
 Projects
 JobGetter, an AI Agent to Screen Jobs | Personal (on github)
-Developed AI Agent to screen recent job listings (~6000/day) from LinkedIn, Indeed, and Greenhouse for matches against my resume using Python and Gemini.
+Developed AI Agent to screen recent job listings (~6000/day) from LinkedIn, Indeed, and Greenhouse.io for matches against a work profile by collecting data using Python and running analysis with Gemini.
 Image Processing for Memory Research using AI | University of Utah
-Created AI-based image processing pipeline to automate central object detection, cropping, and orientation correction for 150+ research photos using GroundingDino.
+Created PyTorch ML image processing pipeline to automate central object detection, cropping, and orientation correction for 150+ research photos using prompt engineering and the GroundingDino model.
 Do Books a Reader Reads Signal their Social Profile | University of Utah
-Developed reader profiling framework to create 5D scored profiles for Goodreads users using a writing sample from a posted book review, LIWC, and text embeddings.
+Developed reader profiling framework to predict user reading frequency by creating a 5-dimensional behavioral profile for Goodreads that scores profile using user-book interactions, book reviews, and LIWC.
 
 Education
 Master’s Mathematics | GPA: 3.73
