@@ -12,18 +12,40 @@ class DescriptionCleaning:
         today = date.today().isoformat()
         filename = f"{DATA_PATH}full_job_data_{today}.csv"
         job_data = pd.read_csv(filename)
+        print(f'Loaded {len(job_data)} jobs')
         return job_data
 
     def clean_df(self, job_data):
         job_data["description"] = job_data["description"].apply(self.extract_requirements)
-        job_data = self.drop_out_of_country(job_data)
-        return job_data
+        ooc = self.drop_out_of_country(job_data)
+        filtered = self.drop_senior_roles(ooc)
+        return filtered
 
     def drop_out_of_country(self, df):
         df["location"] = df["location"].apply(self.check_out_of_country)
-        df = df[df['location'] != 'outside of US']
+        df = df[df['location'] != 'outside of US'].copy()
         return df
 
+    def drop_senior_roles(self, df):
+        df["title"] = df["title"].apply(self.check_senior_role)
+        df = df[df['title'] != 'drop'].copy()
+        return df
+
+    def check_senior_role(self, role_title_string):
+        REMOVE_HEADERS = [
+            "Staff",
+            "Principal",
+            "Manage",
+            "director"
+        ]
+        try:
+            for keyword in REMOVE_HEADERS:
+                if keyword.lower() in role_title_string.lower():
+                    return 'drop'
+
+            return role_title_string
+        except:
+            return role_title_string
     def check_out_of_country(self, location_string):
         KEEP_HEADERS = [
             "US",
@@ -95,7 +117,7 @@ class DescriptionCleaning:
             filename = f"{DATA_PATH}full_jobs_cleaned_{today}.csv"
             full_df.to_csv(filename, index=False, quoting=csv.QUOTE_NONNUMERIC, escapechar="\\")
 
-            print(f"\nSaved cleaned data to {filename}")
+            print(f"\nSaved {len(full_df)} cleaned jobs to {filename}")
         except IOError as e:
             print(f"Error saving cleaned data to CSV: {e}")
 
