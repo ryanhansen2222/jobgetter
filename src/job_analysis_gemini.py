@@ -43,7 +43,7 @@ class AiAnalysis:
 
     async def run_async_analysis(self, df, profile):
         all_tasks = [self.process_row(r,profile) for r in df.to_dict("records")]
-        chunk_len = 2#Set to 100 for API limit
+        chunk_len = 100#Set to 100 for API limit
         chunks = [
             all_tasks[i:i + chunk_len]
             for i in range(0, len(all_tasks), chunk_len)
@@ -54,7 +54,7 @@ class AiAnalysis:
             results_as_list = await asyncio.gather(*chunk)
             results = pd.DataFrame(results_as_list)
             all_results.append(results.copy())
-            time.sleep(5)#Set at 60 for API limits
+            time.sleep(60)#Set at 60 for API limits
         results_df = pd.concat(all_results)
         results_df = results_df.reset_index(drop=True)
         df = pd.concat([df, results_df], axis=1)
@@ -116,7 +116,10 @@ class AiAnalysis:
 
         response = await client.aio.models.generate_content(
             model="gemini-2.5-flash",
-            contents=prompt
+            contents=prompt,
+            config={
+                "response_mime_type": "application/json"
+            }
         )
 
         text = response.text
@@ -171,7 +174,7 @@ class AiAnalysis:
     def full_run(self):
         profile = self.load_profile()
         df = self.load_data()
-        analyzed_df = asyncio.run(self.run_async_analysis(df.head(5), profile))#df.head(limit)
+        analyzed_df = asyncio.run(self.run_async_analysis(df, profile))#df.head(limit)
         today = date.today().isoformat()
         filename = f"{DATA_PATH}analyzed_jobs_{today}.csv"
         analyzed_df.to_csv(filename, index=False, quoting=csv.QUOTE_NONNUMERIC, escapechar="\\")
