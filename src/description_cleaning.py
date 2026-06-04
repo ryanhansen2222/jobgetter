@@ -19,7 +19,8 @@ class DescriptionCleaning:
         job_data["description"] = job_data["description"].apply(self.extract_requirements)
         ooc = self.drop_out_of_country(job_data)
         filtered = self.drop_senior_roles(ooc)
-        return filtered
+        no_applied = self.remove_applied(filtered)
+        return no_applied
 
     def drop_out_of_country(self, df):
         df["location"] = df["location"].apply(self.check_out_of_country)
@@ -29,6 +30,13 @@ class DescriptionCleaning:
     def drop_senior_roles(self, df):
         df["title"] = df["title"].apply(self.check_senior_role)
         df = df[df['title'] != 'drop'].copy()
+        return df
+
+    def remove_applied(self, df):
+        applied_df = pd.read_csv(f"{DATA_PATH}application_tracking.csv")
+        today = date.today().isoformat()
+        df["full_title_id"] = df["company"] + " - " + df["title"]
+        df = df[~df["full_title_id"].isin(applied_df["full_title_id"])]
         return df
 
     def check_senior_role(self, role_title_string):

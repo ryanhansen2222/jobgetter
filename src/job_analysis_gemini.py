@@ -42,11 +42,22 @@ class AiAnalysis:
         return await self.call_gemini_async(row["description"], profile)
 
     async def run_async_analysis(self, df, profile):
-        tasks = [self.process_row(r,profile) for r in df.to_dict("records")]
-        print(f"Processing {len(tasks)} jobs")
-        results_as_list = await asyncio.gather(*tasks)
-        results = pd.DataFrame(results_as_list)
-        df = pd.concat([df, results], axis=1)
+        all_tasks = [self.process_row(r,profile) for r in df.to_dict("records")]
+        chunk_len = 2#Set to 100 for API limit
+        chunks = [
+            all_tasks[i:i + chunk_len]
+            for i in range(0, len(all_tasks), chunk_len)
+        ]
+        all_results = []
+        for idx, chunk in enumerate(chunks):
+            print(f"Processing {len(chunk) + idx*chunk_len}/{len(all_tasks)} jobs")
+            results_as_list = await asyncio.gather(*chunk)
+            results = pd.DataFrame(results_as_list)
+            all_results.append(results.copy())
+            time.sleep(5)#Set at 60 for API limits
+        results_df = pd.concat(all_results)
+        results_df = results_df.reset_index(drop=True)
+        df = pd.concat([df, results_df], axis=1)
         return df
 
     def run_analysis(self, df, profile, limit = 50):
@@ -160,7 +171,7 @@ class AiAnalysis:
     def full_run(self):
         profile = self.load_profile()
         df = self.load_data()
-        analyzed_df = asyncio.run(self.run_async_analysis(df.head(100), profile))
+        analyzed_df = asyncio.run(self.run_async_analysis(df.head(5), profile))#df.head(limit)
         today = date.today().isoformat()
         filename = f"{DATA_PATH}analyzed_jobs_{today}.csv"
         analyzed_df.to_csv(filename, index=False, quoting=csv.QUOTE_NONNUMERIC, escapechar="\\")

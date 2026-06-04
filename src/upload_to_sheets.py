@@ -17,11 +17,12 @@ class SheetsManager:
         return df
     def full_run(self):
         df = self.load_df()
-        df = df.replace({np.nan: "NAN"})
         self.update_sheet(df)
 
 
     def update_sheet(self, df):
+        df = df.replace({np.nan: "NAN"})
+
         gc = gspread.service_account(
             filename="../sheets_credentials.json"
         )
