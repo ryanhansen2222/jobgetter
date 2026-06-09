@@ -19,6 +19,20 @@ class ApplicationTracker:
         return pd.DataFrame(records)
 
 
+    def save_remote_changes_locally(self):
+
+
+        gc = gspread.service_account(filename="../sheets_credentials.json")
+        sheet = gc.open("Job Sheet Master").worksheet("Tracking")
+        records = sheet.get_all_records()
+        df = pd.DataFrame(records)
+        df["full_title_id"] = df["company"] + " - " + df["title"]
+
+        df.to_csv(
+            f"{DATA_PATH}application_tracking.csv",
+            index=False
+        )
+
     def update_application_csv(self):
         existing = None
         try:
@@ -37,8 +51,11 @@ class ApplicationTracker:
         today = date.today().isoformat()
         applied_df["full_title_id"] = df["company"] + " - " + df["title"]
         applied_df["applied_date"] = today
+        applied_df = applied_df[~applied_df["full_title_id"].isin(existing['full_title_id'])]
 
         full_df = pd.concat([existing, applied_df])
+
+        full_df = full_df.drop_duplicates(subset='full_title_id')
 
         full_df.to_csv(
             f"{DATA_PATH}application_tracking.csv",
@@ -49,7 +66,7 @@ class ApplicationTracker:
         return full_df
 
     def update_sheet(self, df):
-        df = df[["company", "title", "match_score", "Applied", "applied_date", "url"]]
+        df = df[["company", "title", "match_score", "Applied", "applied_date", "url", "Status", "Follow up"]]
         gc = gspread.service_account(
             filename="../sheets_credentials.json"
         )
@@ -66,6 +83,7 @@ class ApplicationTracker:
         )
 
     def full_run(self):
+        self.save_remote_changes_locally()
         full_df = self.update_application_csv()
         self.update_sheet(full_df)
 

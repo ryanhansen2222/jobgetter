@@ -20,7 +20,8 @@ class DescriptionCleaning:
         ooc = self.drop_out_of_country(job_data)
         filtered = self.drop_senior_roles(ooc)
         no_applied = self.remove_applied(filtered)
-        return no_applied
+        no_dupes = self.drop_duplicates(no_applied)
+        return no_dupes
 
     def drop_out_of_country(self, df):
         df["location"] = df["location"].apply(self.check_out_of_country)
@@ -37,6 +38,10 @@ class DescriptionCleaning:
         today = date.today().isoformat()
         df["full_title_id"] = df["company"] + " - " + df["title"]
         df = df[~df["full_title_id"].isin(applied_df["full_title_id"])]
+        return df
+
+    def drop_duplicates(self, df):
+        df = df.drop_duplicates(subset='full_title_id')
         return df
 
     def check_senior_role(self, role_title_string):

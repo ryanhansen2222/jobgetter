@@ -30,7 +30,7 @@ if __name__ == '__main__':
     print('Job listings found.')
 
     time.sleep(1)
-    print('Filtering out mismatched listings...')
+    print('Filtering out bad listings...')
     dc = DescriptionCleaning()
     dc.full_run()
     print('Filter complete')
