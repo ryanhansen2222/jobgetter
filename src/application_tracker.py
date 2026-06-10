@@ -49,10 +49,11 @@ class ApplicationTracker:
         ].copy()
 
         today = date.today().isoformat()
-        applied_df["full_title_id"] = df["company"] + " - " + df["title"]
+        applied_df["full_title_id"] = applied_df["company"] + " - " + applied_df["title"]
         applied_df["applied_date"] = today
         applied_df = applied_df[~applied_df["full_title_id"].isin(existing['full_title_id'])]
 
+        #print(applied_df)
         full_df = pd.concat([existing, applied_df])
 
         full_df = full_df.drop_duplicates(subset='full_title_id')
@@ -63,6 +64,7 @@ class ApplicationTracker:
         )
 
         print(f"Saved {len(applied_df)} applications")
+        #print(full_df)
         return full_df
 
     def update_sheet(self, df):
